@@ -1,0 +1,87 @@
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const currentRoutePath = computed(() => router.currentRoute.value.path)
+
+const props = defineProps({
+  navigation: Object
+})
+</script>
+
+<template>
+  <div class="bg-blue-600 xl:flex basis-50 xl:flex-col rounded-lg overflow-hidden">
+    <nav class="p-10 flex flex-col flex-none">
+      <ul role="list" class="flex flex-1 flex-col gap-y-7">
+        <li>
+          <ul role="list" class="-mx-2 space-y-1">
+            <li v-for="(item, index) in props.navigation" :key="item.name">
+              <router-link
+                :to="item.path"
+                class="text-blue-200 group flex items-center gap-x-4 rounded-md pb-5 text-sm font-semibold"
+              >
+                <div
+                  :class="[
+                    currentRoutePath === item.path
+                      ? 'bg-blue-200 text-blue-600'
+                      : 'bg-blue-600 text-white',
+                    'w-9 h-9 min-w-max whitespace-nowrap rounded-full text-xs font-bold ring-1 ring-inset ring-white flex justify-center items-center'
+                  ]"
+                  aria-hidden="true"
+                >
+                  {{ index + 1 }}
+                </div>
+                <div>
+                  STEP {{ index + 1 }}
+                  <div class="text-white font-bold">{{ item.name.toUpperCase() }}</div>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <svg
+      width="274px"
+      height="220px"
+      viewBox="0 0 274 220"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(-0.000470, 0.921487)">
+          <path
+            d="M0.679610075,2.09680254e-14 C39.5370585,0.0723421875 73.0320327,34.0985133 101.164533,102.078513 C113.239449,131.25661 130.886809,154.29566 154.106615,171.195664 C164.691159,163.390985 176.402613,154.658616 189.242658,144.996482 C205.474429,115.717836 219.930158,95.449607 232.609845,84.1917945 C245.162736,73.0465602 258.483882,72.9351078 272.573284,83.8574375 L273.00047,84.1917945 L274.00047,84.922 L273.99647,219.078 L0.000470230991,219.078 L0.000470230991,0.005 L0.679610075,2.09680254e-14 Z"
+            id="Combined-Shape"
+            fill="#8184F9"
+          ></path>
+          <path
+            d="M174.727353,109.816113 C175.7007,108.836847 177.283605,108.832049 178.262871,109.805396 C179.199559,110.736423 179.244675,112.225156 178.394999,113.20986 L178.273588,113.340914 L166.068509,125.62021 C165.095163,126.599476 163.512258,126.604274 162.532992,125.630928 C161.596303,124.6999 161.551187,123.211167 162.400863,122.226464 L162.522275,122.09541 L174.727353,109.816113 Z"
+            id="Line"
+            fill="#FFFFFF"
+            fill-rule="nonzero"
+          ></path>
+          <path
+            d="M186.311706,141.370494 C186.978876,140.161673 188.499668,139.722578 189.708489,140.389749 C190.866943,141.029121 191.318478,142.452461 190.766893,143.633889 L190.689235,143.786532 L181.501735,160.433017 C180.834564,161.641838 179.313772,162.080933 178.104951,161.413762 C176.946497,160.77439 176.494963,159.35105 177.046547,158.169622 L177.124206,158.016978 L186.311706,141.370494 Z"
+            id="Line"
+            fill="#FFFFFF"
+            fill-rule="nonzero"
+          ></path>
+          <path
+            d="M194.424438,116.19964 C195.300403,115.211266 196.784123,115.081131 197.815783,115.873133 L197.953562,115.986856 L210.713328,127.295449 C211.746628,128.211232 211.841895,129.791275 210.926112,130.824574 C210.050147,131.812948 208.566426,131.943083 207.534767,131.151081 L207.396987,131.037358 L194.637222,119.728765 C193.603922,118.812983 193.508655,117.232939 194.424438,116.19964 Z"
+            id="Line"
+            fill="#FFFFFF"
+            fill-rule="nonzero"
+          ></path>
+          <path
+            d="M9.50047023,64.0785133 C44.0182671,64.0785133 72.0004702,92.0607164 72.0004702,126.578513 C72.0004702,161.09631 44.0182671,189.078513 9.50047023,189.078513 C6.27034212,189.078513 3.09744595,188.833474 -0.000643566412,188.360971 L-0.000643566412,64.7960556 C3.09744595,64.3235523 6.27034212,64.0785133 9.50047023,64.0785133 Z"
+            id="Combined-Shape"
+            fill="#F14747"
+          ></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+</template>
