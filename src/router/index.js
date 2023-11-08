@@ -1,6 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import HelloWorld from '../pages/HelloWorld.vue'
 import SignUp from '../pages/SignUp.vue'
 import SelectPersonalInfo from '../components/steps/SelectPersonalInfo.vue'
 import SelectPlan from '../components/steps/SelectPlan.vue'
@@ -9,7 +8,7 @@ import FormSummary from '../components/steps/FormSummary.vue'
 import FormComplete from '../components/steps/FormComplete.vue'
 
 const routes = [
-  { path: '/', component: HelloWorld },
+  { path: '/', redirect: '/form' },
   {
     path: '/form',
     component: SignUp,
