@@ -1,12 +1,20 @@
 <script setup>
-import { computed, inject } from 'vue'
+import router from '@/router'
+import { computed, inject, onMounted } from 'vue'
 import FormStep from './FormStep.vue'
+import Button from '@/components/common/Button.vue'
 import LinkButton from '@/components/common/LinkButton.vue'
 import { formData } from '@/data/formData'
 
 const form = inject('form')
 
-const billingCycle = computed(() => (!form.formState.billingCycle ? 'monthly' : 'yearly'))
+onMounted(() => {
+  if (!form.formState.canSubmit) {
+    router.push('/form')
+  }
+})
+
+const billingYearly = computed(() => (!form.formState.billingYearly ? 'monthly' : 'yearly'))
 const plan = computed(() => form.formState.plan)
 const totalPerMonth = computed(() => {
   const addOns = form.formState.addOns.reduce((acc, addOn) => {
@@ -26,10 +34,15 @@ const getValue = (id, propName) => formData[propName].find((item) => item.id ===
   >
     <div class="flex flex-col bg-gray-100 rounded-lg p-5">
       <ul>
-        <li class="flex flex-col border-b border-gray-300 pb-5">
+        <li
+          :class="[
+            'flex flex-col',
+            form.formState.addOns.length > 0 ? 'pb-5 mb-3 border-b border-gray-300' : ''
+          ]"
+        >
           <div class="flex justify-between items-center">
             <div class="flex flex-col font-bold">
-              {{ plan.label }} ({{ billingCycle }})
+              {{ plan.label }} ({{ billingYearly }})
               <router-link to="/form/plan" class="text-sm text-blue-500 hover:text-blue-600">
                 Change
               </router-link>
@@ -56,7 +69,7 @@ const getValue = (id, propName) => formData[propName].find((item) => item.id ===
     <template #footer>
       <div class="flex justify-between items-center mt-auto">
         <LinkButton link="/form/add-ons" type="link"> Go Back </LinkButton>
-        <LinkButton link="/form/summary" type="primary"> Confirm </LinkButton>
+        <Button @click="form.onSubmitForm" type="primary"> Confirm </Button>
       </div>
     </template>
   </FormStep>

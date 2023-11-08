@@ -1,11 +1,18 @@
 <script setup>
-import { inject } from 'vue'
+import router from '@/router'
+import { inject, onMounted } from 'vue'
 import GroupCheckbox from '../forms/GroupCheckbox.vue'
 import FormStep from './FormStep.vue'
 import LinkButton from '@/components/common/LinkButton.vue'
 import { formData } from '@/data/formData'
 
 const form = inject('form')
+
+onMounted(() => {
+  if (!form.formState.canSubmit) {
+    router.push('/form')
+  }
+})
 </script>
 
 <template>
@@ -14,7 +21,7 @@ const form = inject('form')
       class="mb-6"
       :options="formData.addOns"
       :selected="form.formState.addOns"
-      :update="form.updateCheckboxGroup"
+      :update="form.updateValue"
     />
     <template #footer>
       <div class="flex justify-between items-center mt-auto">

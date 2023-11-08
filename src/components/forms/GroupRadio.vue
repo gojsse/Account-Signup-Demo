@@ -37,10 +37,9 @@ const selectedRadioOption = computed({
             'relative flex flex-col cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none'
           ]"
         >
-          <CheckCircleIcon
-            :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-blue-600 mb-12']"
-            aria-hidden="true"
-          />
+          <div :class="['mb-8', option.iconColor]">
+            <CheckCircleIcon :class="['h-9 w-9']" aria-hidden="true" />
+          </div>
           <div class="flex flex-col">
             <RadioGroupLabel as="span" class="block text-sm font-bold text-gray-900">{{
               option.label

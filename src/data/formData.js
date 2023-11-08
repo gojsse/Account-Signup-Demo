@@ -1,17 +1,15 @@
 export const formData = {
-  user: {
-    name: null,
-    email: null,
-    phone: null
-  },
+  name: null,
+  email: null,
+  phone: null,
   billingCycles: [
     { id: 'monthly', label: 'Monthly' },
     { id: 'yearly', label: 'Yearly' }
   ],
   plans: [
-    { id: 'arcade', label: 'Arcade', value: 9 },
-    { id: 'advanced', label: 'Advanced', value: 12 },
-    { id: 'pro', label: 'Pro', value: 15 }
+    { id: 'arcade', label: 'Arcade', value: 9, iconColor: 'text-yellow-400' },
+    { id: 'advanced', label: 'Advanced', value: 12, iconColor: 'text-red-400' },
+    { id: 'pro', label: 'Pro', value: 15, iconColor: 'text-blue-400' }
   ],
   addOns: [
     {

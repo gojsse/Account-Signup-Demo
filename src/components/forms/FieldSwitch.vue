@@ -13,7 +13,7 @@ const enabled = computed({
     return props.selected
   },
   set(value) {
-    props.update('billingCycle', value)
+    props.update('billingYearly', value)
   }
 })
 </script>

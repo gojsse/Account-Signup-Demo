@@ -1,9 +1,7 @@
 <script setup>
 import { inject } from 'vue'
-import FieldInputEmail from '../forms/FieldInputEmail.vue'
-import FieldInputPhone from '../forms/FieldInputPhone.vue'
-import FieldInputText from '../forms/FieldInputText.vue'
-import FormStep from './FormStep.vue'
+import FieldTextInput from '@/components/forms/FieldTextInput.vue'
+import FormStep from '@/components/steps/FormStep.vue'
 import LinkButton from '@/components/common/LinkButton.vue'
 
 const form = inject('form')
@@ -14,12 +12,44 @@ const form = inject('form')
     :title="'Personal Info'"
     :help-text="'Please provide your name, email address and phone number'"
   >
-    <FieldInputText :value="form.formState.user.name" :update="form.updateUserInput" />
-    <FieldInputEmail :value="form.formState.user.email" :update="form.updateUserInput" />
-    <FieldInputPhone :value="form.formState.user.phone" :update="form.updateUserInput" />
+    <FieldTextInput
+      label="Name"
+      type="name"
+      name="name"
+      placeholder="Your name"
+      :required="true"
+      :value="form.formState.name"
+      :update="form.updateValue"
+      :blur="form.validateField"
+      :error="form.formErrors.name"
+    />
+    <FieldTextInput
+      label="Email Address"
+      type="email"
+      name="email"
+      placeholder="Enter email"
+      :required="true"
+      :value="form.formState.email"
+      :update="form.updateValue"
+      :blur="form.validateField"
+      :error="form.formErrors.email"
+    />
+    <FieldTextInput
+      label="Phone Number"
+      type="phone"
+      name="phone"
+      placeholder="Enter phone"
+      :required="true"
+      :value="form.formState.phone"
+      :update="form.updateValue"
+      :blur="form.validateField"
+      :error="form.formErrors.phone"
+    />
     <template #footer>
       <div class="flex justify-end items-center mt-auto">
-        <LinkButton link="/form/plan" type="primary"> Next Step </LinkButton>
+        <LinkButton link="/form/plan" type="primary" :disabled="!form.formState.canSubmitStep1">
+          Next Step
+        </LinkButton>
       </div>
     </template>
   </FormStep>

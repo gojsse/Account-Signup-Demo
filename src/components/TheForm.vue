@@ -1,7 +1,8 @@
 <script setup>
-import { provide, reactive } from 'vue'
+import { watch, provide, reactive } from 'vue'
 import NavigationMenu from '@/components/NavigationMenu.vue'
 import { formData } from '@/data/formData'
+import { validate } from '@/utils/formValidation'
 
 const navigation = [
   { name: 'Your Info', path: '/form' },
@@ -10,42 +11,72 @@ const navigation = [
   { name: 'Summary', path: '/form/summary' }
 ]
 
-// possibly use joi: https://joi.dev/api/?v=17.9.1
 const formState = reactive({
-  isDirty: false,
-  user: {
-    name: '',
-    email: '',
-    phone: ''
-  },
+  name: '',
+  email: '',
+  phone: '',
   plan: formData.plans[0],
-  billingCycle: false,
-  addOns: []
+  billingYearly: false,
+  addOns: [],
+  canSubmitStep1: false,
+  canSubmitStep2: false,
+  canSubmitStep3: false,
+  canSubmit: false
 })
 
-const updateUserInput = (prop, value) => {
-  console.log('updateUserInput', prop, value)
-  formState.user[prop] = value
-}
+const formErrors = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  plan: '',
+  billingYearly: '',
+  addOns: ''
+})
 
-const updateCheckboxGroup = (prop, values) => {
-  formState[prop] = values
-}
+watch(formState, () => {
+  const nameIsValid = validate.name(formState.name)
+  formErrors.name = nameIsValid
+  const emailIsValid = validate.email(formState.email)
+  formErrors.email = emailIsValid
+  const phoneIsValid = validate.phoneNumber(formState.phone)
+  formErrors.phone = phoneIsValid
 
-const updateRadio = (prop, value) => {
+  formState.canSubmitStep1 =
+    nameIsValid.length === 0 &&
+    emailIsValid.length === 0 &&
+    phoneIsValid.length === 0 &&
+    formState.name.length > 0 &&
+    formState.email.length > 0 &&
+    formState.phone.length > 0
+
+  formState.canSubmitStep2 = formState.canSubmitStep1
+  formState.canSubmitStep3 = formState.canSubmitStep2
+  formState.canSubmit = formState.canSubmitStep1
+
+  // formErrors.plan = validate.radioGroup(formState.plan, formData.plans)
+  // formErrors.billingYearly = validate.boolean(formState.billingYearly)
+  // formErrors.addOns = validate.checkboxGroup(formState.addOns, formData.addOns)
+})
+
+const updateValue = (prop, value) => {
   formState[prop] = value
 }
 
-const updateSwitch = (prop, value) => {
-  formState[prop] = value
+const validateField = (prop, value, isRequired) => {
+  formErrors[prop] = validate.isRequired(value, isRequired)
+}
+
+const onSubmitForm = (e) => {
+  e.preventDefault()
+  console.log('Form submitted!', formState)
 }
 
 provide('form', {
   formState,
-  updateUserInput,
-  updateCheckboxGroup,
-  updateRadio,
-  updateSwitch
+  formErrors,
+  updateValue,
+  validateField,
+  onSubmitForm
 })
 </script>
 
@@ -54,9 +85,11 @@ provide('form', {
     <div class="flex p-4 bg-white rounded-xl">
       <NavigationMenu :navigation="navigation" />
       <div class="flex flex-1 flex-col px-8">
-        <router-view></router-view>
+        <form class="flex flex-1 flex-col">
+          <router-view></router-view>
+        </form>
       </div>
     </div>
-    {{ formState }}
+    <br />
   </div>
 </template>

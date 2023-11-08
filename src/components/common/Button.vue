@@ -1,9 +1,8 @@
 <script setup>
 const props = defineProps({
-  link: String,
   type: {
     type: String,
-    default: 'text'
+    default: 'primary'
   },
   disabled: {
     type: Boolean,
@@ -12,18 +11,16 @@ const props = defineProps({
 })
 
 const types = {
-  link: 'rounded-md px-6 py-3 text-sm font-semibold text-gray-400 hover:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600',
   primary:
     'rounded-md bg-blue-800 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
 }
 </script>
 
 <template>
-  <component
-    :to="props.link"
+  <button
     :class="[types[props.type], props.disabled ? 'opacity-50' : '']"
-    :is="props.disabled ? 'span' : 'router-link'"
+    :disabled="props.disabled === true"
   >
     <slot></slot>
-  </component>
+  </button>
 </template>

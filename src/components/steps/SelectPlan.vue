@@ -1,5 +1,6 @@
 <script setup>
-import { inject } from 'vue'
+import router from '@/router'
+import { inject, onMounted } from 'vue'
 import GroupRadio from '@/components/forms/GroupRadio.vue'
 import FieldSwitch from '@/components/forms/FieldSwitch.vue'
 import FormStep from '@/components/steps/FormStep.vue'
@@ -7,6 +8,12 @@ import LinkButton from '@/components/common/LinkButton.vue'
 import { formData } from '@/data/formData'
 
 const form = inject('form')
+
+onMounted(() => {
+  if (!form.formState.canSubmit) {
+    router.push('/form')
+  }
+})
 </script>
 
 <template>
@@ -18,12 +25,12 @@ const form = inject('form')
       class="mb-6"
       :options="formData.plans"
       :selected="form.formState.plan"
-      :update="form.updateRadio"
+      :update="form.updateValue"
     />
     <FieldSwitch
       :options="formData.billingCycles"
-      :selected="form.formState.billingCycle"
-      :update="form.updateSwitch"
+      :selected="form.formState.billingYearly"
+      :update="form.updateValue"
     />
     <template #footer>
       <div class="flex justify-between items-center mt-auto">

@@ -25,7 +25,10 @@ const selectedOptions = computed({
         v-for="option in props.options"
         :key="option.id"
         :value="option"
-        class="relative flex items-center gap-3 justify-start"
+        :class="[
+          selectedOptions.includes(option.id) ? 'border-blue-600 bg-gray-50' : 'border-gray-300',
+          'relative flex items-center gap-3 justify-start border-solid border-2 hover:border-blue-600 rounded-lg p-4 cursor-pointer'
+        ]"
       >
         <div class="flex h-6 items-center">
           <input
@@ -35,18 +38,20 @@ const selectedOptions = computed({
             v-model="selectedOptions"
             :value="option.id"
             type="checkbox"
-            class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+            class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
           />
         </div>
-        <div class="ml-3 text-sm leading-6">
-          <label :for="option.id" class="font-medium text-gray-900">{{ option.label }}</label>
-          <div id="`${option.id}-description`" class="text-gray-500">
-            {{ option.description }}
+        <label :for="option.id" class="flex flex-1 items-center justify-between">
+          <div class="ml-3 text-sm leading-6">
+            <div class="font-medium text-gray-900">{{ option.label }}</div>
+            <div id="`${option.id}-description`" class="text-gray-500">
+              {{ option.description }}
+            </div>
           </div>
-        </div>
-        <div class="ml-auto">
-          <span class="text-gray-900 font-medium">+${{ option.value }}/mo</span>
-        </div>
+          <div class="ml-auto">
+            <span class="text-blue-600 font-medium">+${{ option.value }}/mo</span>
+          </div>
+        </label>
       </div>
     </div>
   </fieldset>

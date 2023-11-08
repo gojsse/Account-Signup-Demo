@@ -5,32 +5,39 @@ const props = defineProps({
   label: String,
   type: String,
   name: String,
-  value: String,
   placeholder: String,
-  error: String,
-  update: Function
+  value: String,
+  update: Function,
+  blur: Function,
+  error: { type: String, default: '' },
+  required: { type: Boolean, default: false }
 })
 
-const handleInput = (prop, e) => {
-  props.update(prop, e.target.value)
+const handleInput = (propKey, e) => {
+  props.update(propKey, e.target.value.trim())
+}
+
+const handleBlur = (propKey, e) => {
+  props.blur ? props.blur(propKey, e.target.value.trim(), props.required) : null
 }
 </script>
 
 <template>
-  <div>
-    <label for="props.name" class="block text-sm font-medium leading-6 text-gray-900">
+  <div class="mb-4">
+    <label for="props.name" class="block text-sm leading-6 text-gray-900">
       {{ props.label }}
     </label>
-    <div class="relative my-2 rounded-md shadow-sm">
+    <div class="relative rounded-md">
       <input
-        :value="props.value"
-        @input="(e) => handleInput(props.name, e)"
         :class="[
           props.error.length > 0
             ? 'text-red-900 focus:ring-red-500 ring-red-300 placeholder:text-red-300'
             : '',
-          'block w-full rounded-md border-0 py-1.5 pr-10 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6'
+          'block w-full rounded-md border-0 py-2 px-3.5 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset font-medium placeholder:font-normal sm:text-sm sm:leading-6'
         ]"
+        @input="(e) => handleInput(props.name, e)"
+        @blur="(e) => handleBlur(props.name, e)"
+        :value="props.value"
         :type="props.type"
         :name="props.name"
         :id="props.name"
