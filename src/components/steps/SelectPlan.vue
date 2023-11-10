@@ -1,11 +1,11 @@
 <script setup>
-import router from '@/router'
 import { inject, onMounted } from 'vue'
+import router from '@/router'
 import GroupRadio from '@/components/forms/GroupRadio.vue'
 import FieldSwitch from '@/components/forms/FieldSwitch.vue'
 import FormStep from '@/components/steps/FormStep.vue'
 import LinkButton from '@/components/common/LinkButton.vue'
-import { formData } from '@/data/formData'
+import { formData } from '@/data/formData.js'
 
 const form = inject('form')
 

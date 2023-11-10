@@ -7,9 +7,15 @@ export const formData = {
     { id: 'yearly', label: 'Yearly' }
   ],
   plans: [
-    { id: 'arcade', label: 'Arcade', value: 9, iconColor: 'text-yellow-400' },
-    { id: 'advanced', label: 'Advanced', value: 12, iconColor: 'text-red-400' },
-    { id: 'pro', label: 'Pro', value: 15, iconColor: 'text-blue-400' }
+    { id: 'arcade', label: 'Arcade', value: 9, iconColor: 'text-orange-300', iconName: 'IconJoy' },
+    {
+      id: 'advanced',
+      label: 'Advanced',
+      value: 12,
+      iconColor: 'text-rose-400',
+      iconName: 'Icon16B'
+    },
+    { id: 'pro', label: 'Pro', value: 15, iconColor: 'text-blue-400', iconName: 'Icon32B' }
   ],
   addOns: [
     {

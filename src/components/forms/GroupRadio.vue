@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-import { CheckCircleIcon } from '@heroicons/vue/20/solid'
+import MyIcon from '@/components/images/MyIcon.vue'
 
 const props = defineProps({
   options: Object,
@@ -26,24 +26,27 @@ const selectedRadioOption = computed({
         v-for="option in props.options"
         as="template"
         v-slot="{ active, checked }"
+        class="uk-position-z-index"
         :key="option.id"
         :value="option"
       >
         <div
           :class="[
-            active || checked
-              ? 'border-blue-600 ring-2 ring-blue-600 bg-gray-100'
-              : 'border-gray-300',
-            'relative flex flex-col cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none'
+            active || checked ? 'border-blue-600 bg-gray-50' : 'border-gray-300 bg-white',
+            'relative flex flex-col cursor-pointer rounded-lg border p-4 shadow-sm focus:outline-none'
           ]"
         >
-          <div :class="['mb-8', option.iconColor]">
-            <CheckCircleIcon :class="['h-9 w-9']" aria-hidden="true" />
+          <div :class="['mb-8']">
+            <MyIcon
+              :name="option.iconName"
+              :class="[option.iconColor, 'h-10 w-10']"
+              aria-hidden="true"
+            />
           </div>
           <div class="flex flex-col">
-            <RadioGroupLabel as="span" class="block text-sm font-bold text-gray-900">{{
-              option.label
-            }}</RadioGroupLabel>
+            <RadioGroupLabel as="span" class="block text-sm font-bold text-gray-900">
+              {{ option.label }}
+            </RadioGroupLabel>
             <div>${{ option.value }}/mo</div>
           </div>
           <span
