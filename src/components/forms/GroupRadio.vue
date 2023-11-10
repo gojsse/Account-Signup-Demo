@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-import MyIcon from '@/components/images/MyIcon.vue'
+import MyIcon from '@/components/svg/MyIcon.vue'
 
 const props = defineProps({
   options: Object,

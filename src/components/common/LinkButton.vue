@@ -13,7 +13,7 @@ const props = defineProps({
 
 const types = {
   link: 'text-gray-400 hover:text-gray-700 focus-visible:outline-blue-600',
-  primary: 'text-white bg-blue-950 focus-visible:outline-blue-600 shadow-sm'
+  primary: 'shadow-sm text-white bg-blue-950 focus-visible:outline-blue-600'
 }
 </script>
 

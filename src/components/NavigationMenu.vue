@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import NavBg from '@/components/images/NavBg.vue'
+import NavBg from '@/components/svg/NavBg.vue'
 
 const router = useRouter()
 const currentRoutePath = computed(() => router.currentRoute.value.path)

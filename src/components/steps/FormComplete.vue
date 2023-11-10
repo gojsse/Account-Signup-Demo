@@ -1,7 +1,7 @@
 <script setup>
 import { inject, onMounted } from 'vue'
 import router from '@/router'
-import FormCompleteIcon from '@/components/images/FormCompleteIcon.vue'
+import FormCompleteIcon from '@/components/svg/FormCompleteIcon.vue'
 
 const form = inject('form')
 
