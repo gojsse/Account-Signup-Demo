@@ -1,5 +1,6 @@
 <script setup>
 import { watch, provide, reactive } from 'vue'
+import router from '@/router'
 import NavigationMenu from '@/components/NavigationMenu.vue'
 import { formData } from '@/data/formData'
 import { validate } from '@/utils/formValidation'
@@ -21,7 +22,8 @@ const formState = reactive({
   canSubmitStep1: false,
   canSubmitStep2: false,
   canSubmitStep3: false,
-  canSubmit: false
+  canSubmit: false,
+  isSubmitted: false
 })
 
 const formErrors = reactive({
@@ -66,9 +68,28 @@ const validateField = (prop, value, isRequired) => {
   formErrors[prop] = validate.isRequired(value, isRequired)
 }
 
+const handleSubmit = (e) => {
+  e.preventDefault()
+}
+
+const getFormValues = () => {
+  return {
+    name: formState.name,
+    email: formState.email,
+    phone: formState.phone,
+    plan: formState.plan.id,
+    billingYearly: formState.billingYearly,
+    addOns: formState.addOns.map((addOn) => addOn)
+  }
+}
+
 const onSubmitForm = (e) => {
   e.preventDefault()
-  console.log('Form submitted!', formState)
+
+  if (!formState.isSubmitted) {
+    formState.isSubmitted = true
+    router.push('/form/complete')
+  }
 }
 
 provide('form', {
@@ -76,16 +97,17 @@ provide('form', {
   formErrors,
   updateValue,
   validateField,
+  getFormValues,
   onSubmitForm
 })
 </script>
 
 <template>
   <div>
-    <div class="flex p-4 bg-white rounded-xl">
+    <div class="flex p-4 bg-white rounded-xl shadow-xl">
       <NavigationMenu :navigation="navigation" />
       <div class="flex flex-1 flex-col px-8">
-        <form class="flex flex-1 flex-col">
+        <form class="flex flex-1 flex-col" @submit.prevent="handleSubmit">
           <router-view></router-view>
         </form>
       </div>

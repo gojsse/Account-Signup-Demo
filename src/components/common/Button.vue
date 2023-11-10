@@ -11,14 +11,18 @@ const props = defineProps({
 })
 
 const types = {
-  primary:
-    'rounded-md bg-blue-800 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+  primary: 'bg-blue-950 focus-visible:outline-blue-950',
+  submit: 'bg-blue-700 focus-visible:outline-blue-700'
 }
 </script>
 
 <template>
   <button
-    :class="[types[props.type], props.disabled ? 'opacity-50' : '']"
+    :class="[
+      'rounded-md px-6 py-3 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+      types[props.type],
+      props.disabled ? 'opacity-50' : ''
+    ]"
     :disabled="props.disabled === true"
   >
     <slot></slot>

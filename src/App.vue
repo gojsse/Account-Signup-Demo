@@ -1,8 +1,8 @@
 <script setup></script>
 
 <template>
-  <div class="bg-slate-100 min-h-full">
-    <div class="mx-auto max-w-3xl">
+  <div class="bg-sky-100 min-h-full">
+    <div class="mx-auto max-w-4xl">
       <router-view />
     </div>
   </div>

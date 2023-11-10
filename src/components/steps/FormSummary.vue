@@ -1,10 +1,10 @@
 <script setup>
-import router from '@/router'
 import { computed, inject, onMounted } from 'vue'
-import FormStep from './FormStep.vue'
+import router from '@/router'
+import FormStep from '@/components/steps/FormStep.vue'
 import Button from '@/components/common/Button.vue'
 import LinkButton from '@/components/common/LinkButton.vue'
-import { formData } from '@/data/formData'
+import { formData } from '@/data/formData.js'
 
 const form = inject('form')
 
@@ -69,7 +69,7 @@ const getValue = (id, propName) => formData[propName].find((item) => item.id ===
     <template #footer>
       <div class="flex justify-between items-center mt-auto">
         <LinkButton link="/form/add-ons" type="link"> Go Back </LinkButton>
-        <Button @click="form.onSubmitForm" type="primary"> Confirm </Button>
+        <Button @click="form.onSubmitForm" type="submit"> Confirm </Button>
       </div>
     </template>
   </FormStep>

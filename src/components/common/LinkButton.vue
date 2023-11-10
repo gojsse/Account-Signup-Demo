@@ -12,16 +12,19 @@ const props = defineProps({
 })
 
 const types = {
-  link: 'rounded-md px-6 py-3 text-sm font-semibold text-gray-400 hover:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600',
-  primary:
-    'rounded-md bg-blue-800 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+  link: 'text-gray-400 hover:text-gray-700 focus-visible:outline-blue-600',
+  primary: 'text-white bg-blue-950 focus-visible:outline-blue-600 shadow-sm'
 }
 </script>
 
 <template>
   <component
     :to="props.link"
-    :class="[types[props.type], props.disabled ? 'opacity-50' : '']"
+    :class="[
+      'rounded-md px-6 py-3 text-sm font-semibold focus-visible:outline focus-visible:outline-2',
+      types[props.type],
+      props.disabled ? 'opacity-50' : ''
+    ]"
     :is="props.disabled ? 'span' : 'router-link'"
   >
     <slot></slot>

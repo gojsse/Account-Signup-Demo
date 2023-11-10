@@ -1,10 +1,10 @@
 <script setup>
-import router from '@/router'
 import { inject, onMounted } from 'vue'
-import GroupCheckbox from '../forms/GroupCheckbox.vue'
-import FormStep from './FormStep.vue'
+import router from '@/router'
+import GroupCheckbox from '@/components/forms/GroupCheckbox.vue'
+import FormStep from '@/components/steps/FormStep.vue'
 import LinkButton from '@/components/common/LinkButton.vue'
-import { formData } from '@/data/formData'
+import { formData } from '@/data/formData.js'
 
 const form = inject('form')
 
