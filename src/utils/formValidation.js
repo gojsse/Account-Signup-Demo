@@ -3,6 +3,10 @@ import joiPhone from 'joi-phone-number'
 
 const extendedJoi = Joi.extend(joiPhone)
 
+// Message options
+// 'string.empty': 'Name cannot be an empty field',
+// 'any.required': 'Name is required'
+
 const isRequired = (value) => {
   const validation = extendedJoi.string().required().validate(value)
 
@@ -14,10 +18,16 @@ const isRequired = (value) => {
 }
 
 const validateName = (value) => {
-  const validation = extendedJoi.string().alphanum().min(2).max(100).validate(value)
+  const validation = extendedJoi
+    .string()
+    .min(2)
+    .messages({
+      'string.min': `Name should be min {#limit} characters..`
+    })
+    .validate(value)
 
   if (validation.error) {
-    return 'Please enter a valid value'
+    return validation.error
   }
 
   return ''

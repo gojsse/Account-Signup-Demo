@@ -19,6 +19,7 @@ const formState = reactive({
   plan: formData.plans[0],
   billingYearly: false,
   addOns: [],
+  isBusy: false,
   canSubmitStep1: false,
   canSubmitStep2: false,
   canSubmitStep3: false,
@@ -83,11 +84,22 @@ const getFormValues = () => {
   }
 }
 
-const onSubmitForm = (e) => {
+const sleep = (delay) => {
+  return new Promise((resolve) => {
+    return setTimeout(resolve, delay)
+  })
+}
+
+const onSubmitForm = async (e) => {
   e.preventDefault()
 
   if (!formState.isSubmitted) {
+    formState.isBusy = true
+
+    // Do async API post stuff here
+    await sleep(2500)
     formState.isSubmitted = true
+    formState.isBusy = false
     router.push('/form/complete')
   }
 }
@@ -103,15 +115,15 @@ provide('form', {
 </script>
 
 <template>
-  <div>
-    <div class="flex p-4 bg-white rounded-xl shadow-xl">
-      <NavigationMenu :navigation="navigation" />
-      <div class="flex flex-1 flex-col px-8">
-        <form class="flex flex-1 flex-col" @submit.prevent="handleSubmit">
-          <router-view></router-view>
-        </form>
-      </div>
+  <div class="flex p-4 pb-20 md:pb-4 bg-white rounded-xl shadow-xl flex-col md:flex-row">
+    <NavigationMenu :navigation="navigation" />
+    <div class="flex flex-1 flex-col px-8">
+      <form
+        :class="[formState.isBusy ? 'opacity-40' : '', 'flex flex-1 flex-col']"
+        @submit.prevent="handleSubmit"
+      >
+        <router-view></router-view>
+      </form>
     </div>
-    <br />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup>
 import { inject, onMounted } from 'vue'
 import router from '@/router'
-import FormCompleteIcon from '@/components/svg/FormCompleteIcon.vue'
+import CircleCheck from '@/components/svg/CircleCheck.vue'
 
 const form = inject('form')
 
@@ -14,7 +14,7 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col justify-center items-center h-full">
-    <FormCompleteIcon />
+    <CircleCheck />
     <h2 class="font-bold text-3xl pt-7 pb-2">Thank You!</h2>
     <p class="text-center text-gray-500">
       Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
