@@ -1,6 +1,7 @@
-# multi-step-form-vue
+# Account Signup Form Demo
 
-This template should help get you started developing with Vue 3 in Vite.
+Demonstrates a responsive multi-step form using Vue 3, Vite and Tailwind. Demo site is hosted on and auto-deployed to
+[Netlify](https://app.netlify.com/sites/famous-phoenix-cb0e94/deploys).
 
 ## Recommended IDE Setup
 
