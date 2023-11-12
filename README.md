@@ -1,7 +1,7 @@
 # Account Signup Form Demo
 
 Demonstrates a responsive multi-step form using Vue 3, Vite and Tailwind. Demo site is hosted on and auto-deployed to
-[Netlify](https://app.netlify.com/sites/famous-phoenix-cb0e94/deploys).
+[Netlify](https://famous-phoenix-cb0e94.netlify.app).
 
 ## Recommended IDE Setup
 
