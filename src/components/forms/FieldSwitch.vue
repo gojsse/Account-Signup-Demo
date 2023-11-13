@@ -19,8 +19,8 @@ const enabled = computed({
 </script>
 
 <template>
-  <SwitchGroup as="div" class="flex justify-center items-center bg-gray-100 rounded-lg p-2">
-    <SwitchLabel as="span" class="mr-6 text-sm">
+  <SwitchGroup as="div" class="flex justify-center items-center bg-gray-100 rounded-lg px-2 py-3">
+    <SwitchLabel as="span" class="mr-6 text-sm cursor-pointer">
       <span :class="[enabled ? 'text-gray-400' : 'text-gray-900', 'font-bold']">
         {{ props.options[0].label }}
       </span>
@@ -39,7 +39,7 @@ const enabled = computed({
         ]"
       />
     </Switch>
-    <SwitchLabel as="span" class="ml-6 text-sm">
+    <SwitchLabel as="span" class="ml-6 text-sm cursor-pointer">
       <span :class="[enabled ? 'text-gray-900' : 'text-gray-400', 'font-bold']">{{
         props.options[1].label
       }}</span>

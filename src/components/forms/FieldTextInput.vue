@@ -33,7 +33,7 @@ const handleBlur = (propKey, e) => {
           props.error.length > 0
             ? 'text-red-900 focus:ring-red-500 ring-red-300 placeholder:text-red-300'
             : '',
-          'block w-full rounded-md border-0 py-3 px-4 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset hover:ring-blue-600 font-medium placeholder:font-normal text-medium sm:leading-6 cursor-pointer'
+          'block w-full rounded-md border-0 py-2 md:py-3 px-3 md:px-4 ring-1 ring-inset ring-gray-300 focus:ring-inset hover:ring-blue-600 font-medium placeholder:font-normal text-medium sm:leading-6 cursor-pointer'
         ]"
         @input="(e) => handleInput(props.name, e)"
         @blur="(e) => handleBlur(props.name, e)"

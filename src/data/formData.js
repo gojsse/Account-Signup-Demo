@@ -6,6 +6,7 @@ export const formData = {
     { id: 'monthly', label: 'Monthly' },
     { id: 'yearly', label: 'Yearly' }
   ],
+  // .value is in monthly us dollars
   plans: [
     { id: 'arcade', label: 'Arcade', value: 9, iconColor: 'text-orange-300', iconName: 'IconJoy' },
     {

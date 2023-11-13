@@ -4,6 +4,10 @@ import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import MyIcon from '@/components/svg/MyIcon.vue'
 
 const props = defineProps({
+  stateProp: {
+    type: String,
+    required: true
+  },
   options: Object,
   selected: Object,
   update: Function
@@ -14,7 +18,7 @@ const selectedRadioOption = computed({
     return props.selected
   },
   set(value) {
-    props.update('plan', value)
+    props.update(props.stateProp, value)
   }
 })
 </script>
@@ -26,17 +30,16 @@ const selectedRadioOption = computed({
         v-for="option in props.options"
         as="template"
         v-slot="{ active, checked }"
-        class="uk-position-z-index"
         :key="option.id"
         :value="option"
       >
         <div
           :class="[
-            active || checked ? 'border-blue-600 bg-gray-50' : 'border-gray-300 bg-white',
-            'relative flex flex-col cursor-pointer rounded-lg border p-4 shadow-sm focus:outline-none'
+            active || checked ? 'ring-blue-600 bg-gray-50' : 'ring-gray-300 bg-white',
+            'relative flex md:flex-col gap-4 md:gap-0 items-center md:items-start cursor-pointer rounded-lg border-0 ring-1 ring-inset ring-gray-300 focus:ring-inset p-4 shadow-sm'
           ]"
         >
-          <div :class="['mb-8']">
+          <div :class="['md:mb-8']">
             <MyIcon
               :name="option.iconName"
               :class="[option.iconColor, 'h-10 w-10']"
@@ -44,10 +47,13 @@ const selectedRadioOption = computed({
             />
           </div>
           <div class="flex flex-col">
-            <RadioGroupLabel as="span" class="block text-sm font-bold text-gray-900">
+            <RadioGroupLabel as="span" class="block md:text-sm font-bold text-gray-900">
               {{ option.label }}
             </RadioGroupLabel>
-            <div>${{ option.value }}/mo</div>
+            <div class="text-gray-400">${{ option.subLabel }}</div>
+            <div v-if="option.discountNote" class="text-blue-950 text-sm">
+              ${{ option.discountNote }}
+            </div>
           </div>
           <span
             :class="[

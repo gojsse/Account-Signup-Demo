@@ -46,7 +46,7 @@ const form = inject('form')
       :error="form.formErrors.phone"
     />
     <template #footer>
-      <div class="flex justify-end items-center mt-auto">
+      <div class="flex justify-end items-center">
         <LinkButton link="/form/plan" type="primary" :disabled="!form.formState.canSubmitStep1">
           Next Step
         </LinkButton>

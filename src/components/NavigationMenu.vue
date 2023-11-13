@@ -12,11 +12,13 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="relative bg-blue-600 xl:flex basis-50 xl:flex-col rounded-lg overflow-hidden">
-    <nav class="p-10 relative z-20">
+  <div
+    class="absolute md:relative left-0 top-0 w-full md:w-auto bg-blue-600 xl:flex basis-50 xl:flex-col md:rounded-lg overflow-hidden z-10"
+  >
+    <nav class="pt-10 pb-28 md:pt-8 md:pb-8 px-8 md:p-10 relative z-20">
       <ul
         role="list"
-        class="-mx-2 md:space-y-1 flex flex-1 flex-row items-center md:items-start md:flex-col gap-10 md:gap-0 justify-center"
+        class="-mx-2 md:space-y-1 flex flex-1 flex-row items-center md:items-start md:flex-col gap-4 md:gap-0 justify-center"
       >
         <li v-for="(item, index) in props.navigation" :key="item.name">
           <div
@@ -41,6 +43,6 @@ const props = defineProps({
         </li>
       </ul>
     </nav>
-    <NavBg :class="['absolute md:relative z-10 bottom-0']" />
+    <NavBg :class="['h-auto w-full absolute md:relative z-10 bottom-0']" />
   </div>
 </template>

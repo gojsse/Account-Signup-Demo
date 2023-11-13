@@ -55,10 +55,6 @@ watch(formState, () => {
   formState.canSubmitStep2 = formState.canSubmitStep1
   formState.canSubmitStep3 = formState.canSubmitStep2
   formState.canSubmit = formState.canSubmitStep1
-
-  // formErrors.plan = validate.radioGroup(formState.plan, formData.plans)
-  // formErrors.billingYearly = validate.boolean(formState.billingYearly)
-  // formErrors.addOns = validate.checkboxGroup(formState.addOns, formData.addOns)
 })
 
 const updateValue = (prop, value) => {
@@ -115,11 +111,19 @@ provide('form', {
 </script>
 
 <template>
-  <div class="flex p-4 pb-20 md:pb-4 bg-white rounded-xl shadow-xl flex-col md:flex-row">
+  <div class="flex md:p-4 md:pb-4 bg-white rounded-xl shadow-xl flex-col md:flex-row">
     <NavigationMenu :navigation="navigation" />
-    <div class="flex flex-1 flex-col px-8">
+    <div class="bg-white relative rounded-xl flex flex-1 flex-col px-6 md:px-8 z-20 mt-28 md:mt-0">
+      <div
+        :class="[
+          'flex flex-1 absolute top-0 left-0',
+          formState.isBusy
+            ? 'w-full h-full z-20 space-y-5 rounded-lg bg-white/5 p-4 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-blue-500/30 before:to-transparent isolate overflow-hidden'
+            : 'w-0 h-0 z-0'
+        ]"
+      ></div>
       <form
-        :class="[formState.isBusy ? 'opacity-40' : '', 'flex flex-1 flex-col']"
+        :class="[formState.isBusy ? 'opacity-6' : '', 'flex flex-1 flex-col']"
         @submit.prevent="handleSubmit"
       >
         <router-view></router-view>
